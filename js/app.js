@@ -29,9 +29,10 @@ angular.module('TodoList', []).
             };
 
 
-            var id = localStorage.length;
+            var id = localStorage.length+1;
             keyId = idMask + id;
             window.localStorage.setItem(keyId, JSON.stringify(newTodo));
+
             // по сабмиту добавлем в массив todos
             // для вывода в списке в реальном времени
             // элементы с инпутом и чекбоксом;

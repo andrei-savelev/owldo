@@ -19,26 +19,32 @@
 	  <h3 class="list-group-item title">Список задач</h3>
 
 	  <!-- Список Задач -->
-	  <div ng-repeat="todo in todos" class="list-group-item">
-		  <input type="checkbox" ng-model="todo.done"/>
-		  <input type="text" ng-model="todo.text" class="todo"/>
-		  <a ng-click="move($index, 'up')" href=""><span class="glyphicon glyphicon-arrow-up"></span></a>
-		  <a ng-click="move($index, 'down')" href=""><span class="glyphicon glyphicon-arrow-down"></span></a>
-		  <a ng-click="removeTodo($index)" href=""><span class="glyphicon glyphicon-remove-circle"></span></a>
-	  </div>
+	  <ul class="list-group-item">
+		  <li ng-repeat="todo in todos">
+			  <div class="b-left">
+				  <input type="checkbox" ng-model="todo.done"/>
+				  <p ng-class="{done:todo.done}" class="todo">{{todo.text}}</p>
+			  </div>
+			  <div class="b-right">
+				  <a ng-click="move($index, 'up')" href=""><span class="glyphicon glyphicon-arrow-up"></span></a>
+				  <a ng-click="move($index, 'down')" href=""><span class="glyphicon glyphicon-arrow-down"></span></a>
+				  <a ng-click="removeTodo($index)" href=""><span class="glyphicon glyphicon-remove-circle"></span></a>
+			  </div>
+		  </li>
+	  </ul>
 	  <!-- / Список Задач -->
 
 	  <!-- Предпоказ вводимых значений -->
 
 	  <div class="list-group-item" ng-show="todoText">
-		  <input disabeled="true" type="checkbox"/>
-		  <input disabeled="true" type="text" class="todo" placeholder={{todoText}} />
+		  <!--input disabeled="true" type="checkbox" /-->
+		  <p class="todo">{{todoText}}</p>
 	  </div>
 	  <!-- / Предпоказ вводимых значений -->
 
 	  <!-- Форма добавления новых задач -->
 	  <form ng-submit="addTodo()" class="list-group-item">
-		  <input type="text" ng-model="todoText"/>
+		  <textarea type="text" ng-model="todoText">{{todoText}}</textarea>
 		  <input type="submit" class="btn btn-default" value="Добавить задачу"/>
 	  </form>
 		<!-- / Форма добавления новых задач -->
