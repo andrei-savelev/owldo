@@ -4,22 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OwlDo</title>
-    <link rel="stylesheet" href="css/foundation.css" />
+	 <!-- link rel="stylesheet" href="css/foundation.css" /-->
+	 <link rel="stylesheet" href="css/app.css" />
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/vendor/angular.min.js"></script>
+    <script src="js/app.js"></script>
   </head>
-  <body>
-    
-    <div class="row">
-      <div class="large-6 large-offset-3 columns">
-        <h1 class="text-center">ToDo list</h1>
-      </div>
-    </div>
-    
-	<div class="row">
-		
-    </div>
-    
+  <body ng-controller="TodoCtrl">
+
+	<div class="wrap">
+		<h1 class="text-center">Список задач</h1>
+		<!-- Список Задач -->
+		<div ng-repeat="todo in todos">
+			<input type="checkbox" ng-model="todo.done"/>
+			<input type="text" ng-model="todo.text"/>
+			<a ng-click="move($index, 'up')" href="">Вверх</a>
+			<a ng-click="move($index, 'down')" href="">Вниз</a>
+			<a ng-click="removeTodo($index)" href="">Удалить</a>
+		</div>
+		<!-- / Список Задач -->
+
+		<!-- Форма добавления новых задач -->
+		<form action="" ng-submit="addTodo()">
+			<input type="text" ng-model="todoText"/>
+			<input type="submit"/>
+		</form>
+		<!-- / Форма добавления новых задач -->
+	</div>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <script>
