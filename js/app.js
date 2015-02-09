@@ -1,10 +1,10 @@
 /* Created by Andrey Savelev on 09.02.2015. */
+// Определение модели и зависимостей
+angular.module('todoapp', ['firebase']);
 
-function TodoCtrl($scope){
-    $scope.todos = [
-        {done: true, text: 'first'},
-        {done: false, text: 'second'}
-    ];
+// Основная логика
+function TodoCtrl($scope, 'angularFire'){
+    $scope.todos = [];
     $scope.addTodo = function (){
       var newTodo = {
           done: false,
