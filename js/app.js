@@ -6,18 +6,21 @@ angular.module('TodoList', []).
         var key = '';
         // Маска для записи в localStrage
         var idMask = "key_";
+        // Определяем переменную, которой в последствии будем 
+        // присваивать ключ для сохранения в LocalStorage
         var keyId = '';
-        $scope.todos = [
-
-        ];
+        // В общем скопе определяем массив для вывода данных через 
+        // директиву ng-repeat
+        $scope.todos = [];
         // Получаем ключи у значений LocalStorage,
-        // кладем их в переменную key и присваеваем indx в массиве todos
+        // кладем их в переменную key и присваеваем элементу 
+        //со значением indx в массиве todos
         for(var indx = 0; indx < window.localStorage.length; indx++){
             key = localStorage.key(indx);
             $scope.data = JSON.parse(window.localStorage.getItem(key));
             $scope.todos[indx] = $scope.data;
         }
-
+        // Функция для добавления новых задач в todos и сохранения в LocalStorage
         $scope.addTodo = function () {
             // Не добавлять пустые строки
             if($scope.todoText.length === 0){
@@ -28,12 +31,16 @@ angular.module('TodoList', []).
                 text: $scope.todoText
             };
 
-
+            // Переменной id присваеваем длинну хранилища, 
             var id = localStorage.length+1;
+            // Переменной keyId присваеваем маску 
+            //с номером последнего элемента в хранилище
             keyId = idMask + id;
+            // сохраняем в хранилище значение объекта newTodo
+            // предварительно сериализуем данные 
             window.localStorage.setItem(keyId, JSON.stringify(newTodo));
 
-            // по сабмиту добавлем в массив todos
+            // добавлем в массив todos
             // для вывода в списке в реальном времени
             // элементы с инпутом и чекбоксом;
             $scope.todos.push(newTodo);
@@ -90,7 +97,26 @@ angular.module('TodoList', []).
             // C
             $scope.todos.splice(index, 1);
         };
+        $scope.activityTodo = function (index) {
+            // узнаем на каком элементе произошел клик
+            var todo = $scope.todos[index];
+            // ключ элемента в хранилище с этим нидексом кладем в перменную
+            var tempKey = window.localStorage.key(index);
+            //во временную перменную кладем эелмент с этим ключем 
+            // предварительно его десереализуем;
+            var tempItem = JSON.parse(window.localStorage.getItem(tempKey));
+            if(todo.done === false){
+                tempItem.done = false;
+                window.localStorage.setItem(tempKey, JSON.stringify(tempItem));
+                return;
+            }
+            if(todo.done === true){
+                tempItem.done = true;
+                window.localStorage.setItem(tempKey, JSON.stringify(tempItem));
+                return;
+            }
 
+        }
     }]);
 
 
