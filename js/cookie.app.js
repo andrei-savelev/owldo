@@ -1,4 +1,12 @@
 $(document).ready(function(){
+	
+	var h = "http";
+	var str = window.location.toString();
+	var loc = str.slice(0, 4);
+
+	if(loc !== h){
+		$('#protocolWrng').show();
+	};
 
 	// Создаем эффект заблокированного фона
 	$('body').append('<div id="blackout"></div>');

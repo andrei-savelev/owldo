@@ -1,6 +1,9 @@
 /*
 * Основной контент
 */
+#protocolWrng {
+    display: none;
+}
 .wrap {
     width: 400px;
     margin-left: auto;
